@@ -6,7 +6,7 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 13:14:44 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/11/28 14:45:30 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/01 11:11:18 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define TRUE (1)
 # define FALSE (0)
 # define ERROR (-1)
+
+# define BUFF_SIZE 16
 
 typedef struct	s_list
 {
@@ -66,6 +68,7 @@ char			**ft_strsplit(const char *str, char c);
 int				*ft_range(int min, int max);
 char			*ft_itoa(int nbr);
 char			*ft_itoa_base(int number, int base);
+int				ft_get_next_line(const int fd, char **line);
 
 /*
 ** Memory modify, no allocation
