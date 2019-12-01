@@ -6,14 +6,16 @@
 #    By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 13:15:52 by ngontjar          #+#    #+#              #
-#    Updated: 2019/12/01 10:54:51 by ngontjar         ###   ########.fr        #
+#    Updated: 2019/12/01 15:11:36 by ngontjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SOURCES = fdf.c
+SOURCES = main.c get_dimensions.c free2d.c free2d_terminated.c malloc2d_int.c draw_square.c
+
 OBJECTS = $(subst .c,.o,$(SOURCES))
+
 LIBFT = libft/libft.a
 
 FLAGS = -Wall -Wextra -Werror
