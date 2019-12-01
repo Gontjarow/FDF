@@ -6,13 +6,19 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 12:33:57 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/01 15:08:24 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/01 18:45:04 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # include "libft/libft.h"
+
+typedef struct	s_window
+{
+	void	*mlx;
+	void	*win;
+}				t_window;
 
 typedef struct	s_xy
 {
@@ -22,10 +28,17 @@ typedef struct	s_xy
 
 typedef struct	s_rect
 {
-	t_xy pos;
-	t_xy size;
-	int color;
+	t_xy	pos;
+	t_xy	size;
+	int		color;
 }				t_rect;
+
+typedef struct	s_line
+{
+	t_xy	start;
+	t_xy	end;
+	int		color;
+}				t_line;
 
 typedef enum	e_color
 {
@@ -39,10 +52,25 @@ typedef enum	e_color
 	yellow = 0xFFFF56
 }				t_color;
 
-void			free2d_terminated(char **strarray);
-void			free2d(void **array, size_t type_size, size_t count);
-int				get_dimensions(char *file, t_xy *dimensions);
-int				**malloc2d_int(t_xy dimensions);
-int				draw_rect(void *mlx_ptr, void *win_ptr, t_rect rect);
+typedef enum	e_keycode
+{
+	key_ESC = 53,
+	key_W = 13,
+	key_A = 0,
+	key_S = 1,
+	key_D = 2
+}				t_keycode;
 
+int				**malloc2d_int(t_xy dimensions);
+void			free2d(void **array, size_t type_size, size_t count);
+void			free2d_terminated(char **strarray);
+
+int				get_dimensions(char *file, t_xy *dimensions);
+
+int				draw_rect(void *mlx_ptr, void *win_ptr, t_rect rect);
+int				draw_line(t_line *line);
+
+int				keyboard(int keycode, void *param);
+
+t_window		g_env;
 #endif

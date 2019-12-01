@@ -18,6 +18,5 @@ int		draw_rect(void *mlx_ptr, void *win_ptr, t_rect rect)
 		}
 		++h;
 	}
-
 	return (1);
 }

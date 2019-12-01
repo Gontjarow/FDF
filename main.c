@@ -1,40 +1,33 @@
 #include "mlx.h"
 #include "fdf.h"
 
-static int	key_press(int key, void *param)
-{
-	(void)param;
-	if (key == 53)
-		exit (0);
-	;
-	ft_putnbr(key);
-	ft_putendl("");
-	return (0);
-}
+
 
 int			main(int argc, char **argv)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_xy	dimensions;
-	int		**map;
+	int			**map;
+	t_xy		scale;
+	t_line		line;
+	t_rect		rect;
 
-	if (argc == 2)
+	if (argc == 2 && get_dimensions(argv[1], &scale))
 	{
-		get_dimensions(argv[1], &dimensions);
-		map = malloc2d_int(dimensions);
-		ft_putnbr(dimensions.x); ft_putendl("");
-		ft_putnbr(dimensions.y); ft_putendl("");
-		ft_putendl(ft_itoa(map[3][3]));
+		map = malloc2d_int(scale);
+		ft_putnbr(scale.x); ft_putendl(" - width");
+		ft_putnbr(scale.y); ft_putendl(" - height");
 
-		mlx_ptr = mlx_init();
-		win_ptr = mlx_new_window(mlx_ptr, 800, 450, "Cinematic 16:9 (tm)");
-		mlx_key_hook(win_ptr, &key_press, NULL);
-		t_xy cell_size = { 800/19, 450/11 };
-		draw_rect(mlx_ptr, win_ptr, (t_rect){{0, 0}, cell_size, orange});
-		ft_putendl("I AM HERE!");
+		g_env.mlx = mlx_init();
+		g_env.win = mlx_new_window(g_env.mlx,
+			scale.x * 100, scale.y * 100, "Cinematic 16:9 (tm)");
 
-		mlx_loop(mlx_ptr);
+		line = (t_line){{10,10}, {40,40}, white};
+		mlx_loop_hook(g_env.mlx, &draw_line, &line);
+
+		rect = (t_rect){{10, 20}, {scale.x, scale.y}, orange};
+		draw_rect(g_env.mlx, g_env.win, rect); // won't draw at the same time?
+
+		mlx_key_hook(g_env.win, &keyboard, NULL);
+		mlx_loop(g_env.mlx);
 	}
 	else
 	{
