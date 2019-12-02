@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc2d_int.c                                     :+:      :+:    :+:   */
+/*   malloc2d_xyz.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 12:51:33 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/01 15:01:06 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/02 19:55:36 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		**malloc2d_int(t_xy dimensions)
+t_xyz	**malloc2d_xyz(t_xy size)
 {
-	int		**rows;
-	size_t	count;
+	t_xyz	**rows;
+	size_t	i;
 
-	if((rows = (int **)malloc(sizeof(int **) * dimensions.y)))
+	if((rows = (t_xyz **)malloc(sizeof(t_xyz **) * size.y)))
 	{
-		count = 0;
-		while (count < dimensions.y)
+		i = 0;
+		while (i < size.y)
 		{
-			if (NULL == (rows[count] = (int *)malloc(sizeof(int) * dimensions.x)))
+			if (NULL == (rows[i] = (t_xyz *)malloc(sizeof(t_xyz) * size.x)))
 			{
-				free2d((void **)rows, sizeof(int), count);
+				free2d((void **)rows, sizeof(t_xyz), i);
 				return (NULL);
 			}
-			++count;
+			++i;
 		}
 	}
 	return (rows);
