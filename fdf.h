@@ -6,41 +6,55 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 12:33:57 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/01 18:45:04 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/04 16:46:57 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # include "libft/libft.h"
+# include <math.h>
+
+/*
+** double can accurately represent all 32-bit integers.
+** The exact precision cutoff is between 52 and 53 bits.
+** Sidenote: float can only represent up to 24 bits.
+*/
+
+typedef struct	s_xy
+{
+	double	x;
+	double	y;
+}				t_xy;
 
 typedef struct	s_window
 {
 	void	*mlx;
 	void	*win;
+	t_xy	size;
 }				t_window;
 
-typedef struct	s_xy
-{
-	size_t	x;
-	size_t	y;
-}				t_xy;
-
-typedef struct	s_rect
+typedef struct	s_shape
 {
 	t_xy	pos;
-	t_xy	size;
+	t_xy	data;
 	int		color;
-}				t_rect;
+}				t_shape;
 
-typedef struct	s_line
+typedef struct s_xyz
 {
-	t_xy	start;
-	t_xy	end;
-	int		color;
-}				t_line;
+	double	x;
+	double	y;
+	double	z;
+}				t_xyz;
 
-typedef enum	e_color
+typedef struct s_map
+{
+	t_xyz	**array;
+	t_xy	size;
+}				t_map;
+
+enum	e_color
 {
 	black = 0x0,
 	white = 0xFFFFFF,
@@ -50,25 +64,26 @@ typedef enum	e_color
 	orange = 0xFF8300,
 	tangelo = 0xf94d00,
 	yellow = 0xFFFF56
-}				t_color;
+};
 
-typedef enum	e_keycode
+enum	e_keycode
 {
 	key_ESC = 53,
 	key_W = 13,
 	key_A = 0,
 	key_S = 1,
 	key_D = 2
-}				t_keycode;
+};
 
-int				**malloc2d_int(t_xy dimensions);
+void			die(char *error);
+t_xyz			**malloc2d_xyz(t_xy size);
 void			free2d(void **array, size_t type_size, size_t count);
 void			free2d_terminated(char **strarray);
 
-int				get_dimensions(char *file, t_xy *dimensions);
+void			parse_map(int fd, t_map *map);
 
-int				draw_rect(void *mlx_ptr, void *win_ptr, t_rect rect);
-int				draw_line(t_line *line);
+int				draw_rect(void *mlx_ptr, void *win_ptr, t_shape rect);
+int				draw_line(t_shape *line);
 
 int				keyboard(int keycode, void *param);
 

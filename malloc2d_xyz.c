@@ -6,7 +6,7 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 12:51:33 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/02 19:55:36 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/04 16:07:28 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,22 @@
 t_xyz	**malloc2d_xyz(t_xy size)
 {
 	t_xyz	**rows;
-	size_t	i;
+	int		x;
+	int		y;
 
-	if((rows = (t_xyz **)malloc(sizeof(t_xyz **) * size.y)))
+	if((rows = (t_xyz **)malloc(size.y * sizeof(t_xyz **))))
 	{
-		i = 0;
-		while (i < size.y)
+		y = 0;
+		while (y < size.y)
 		{
-			if (NULL == (rows[i] = (t_xyz *)malloc(sizeof(t_xyz) * size.x)))
+			x = 0;
+			while (x < size.x)
 			{
-				free2d((void **)rows, sizeof(t_xyz), i);
-				return (NULL);
+				if (NULL == (rows[x] = (t_xyz *)malloc(size.x * sizeof(t_xyz))))
+					die("malloc failed in malloc2dxyz");
+				++x;
 			}
-			++i;
+			++y;
 		}
 	}
 	return (rows);
