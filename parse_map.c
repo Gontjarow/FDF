@@ -6,7 +6,7 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 12:28:32 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/04 16:52:40 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/05 12:38:11 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static size_t	arrlen_terminated(char **array)
 
 void			parse_map(int fd, t_map *map)
 {
-	t_xyz	**final;
 	char	*lines[4096];
 	char	*line;
 	char	**split;
@@ -61,18 +60,17 @@ void			parse_map(int fd, t_map *map)
 		if (width == 0)
 		{
 			width = arrlen_terminated(split);
-			final = malloc2d_xyz((t_xy){width, height});
+			map->array = malloc2d_xyz((t_xy){width, height});
 		}
 		x = 0;
 		while (x < width)
 		{
-			final[y][x].x = x;
-			final[y][x].y = y;
-			final[y][x].z = ft_atoi(split[x]);
+			map->array[y][x].x = x;
+			map->array[y][x].y = y;
+			map->array[y][x].z = ft_atoi(split[x]);
 			++x;
 		}
 		++y;
 	}
-	map->array = final;
 	map->size = (t_xy){width, height};
 }

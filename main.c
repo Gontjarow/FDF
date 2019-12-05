@@ -27,8 +27,8 @@ int			main(int argc, char **argv)
 		line.data = (t_xy){line.pos.x + 90, line.pos.y + 90};
 		line.color = orange;
 
-		mlx_loop_hook(g_env.mlx, &draw_line, &line);
-		mlx_key_hook(g_env.win, &keyboard, NULL);
+		// mlx_loop_hook(g_env.mlx, &draw_map, map.array);
+		mlx_key_hook(g_env.win, &keyboard, &map);
 		mlx_loop(g_env.mlx);
 	}
 	else

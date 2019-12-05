@@ -6,18 +6,18 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 17:47:55 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/02 19:02:18 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/05 14:36:34 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "fdf.h"
 #include <stdio.h>
-#include <time.h>
+// #include <time.h>
 
 int	draw_line(t_shape *line)
 {
-	mlx_clear_window(g_env.mlx, g_env.win);
+	// mlx_clear_window(g_env.mlx, g_env.win);
 	t_xy	pixel;
 	t_xy	delta;
 	int		points;
@@ -38,6 +38,7 @@ int	draw_line(t_shape *line)
 		pixel.x += delta.x;
 		pixel.y += delta.y;
 		--points;
+		printf("pixel drawn at x%f y%f\n", pixel.x, pixel.y);
 	}
 	return (1);
 }

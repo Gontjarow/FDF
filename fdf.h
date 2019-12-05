@@ -6,13 +6,14 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 12:33:57 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/04 16:46:57 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/05 15:13:34 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # include "libft/libft.h"
+# include "mlx.h"
 # include <math.h>
 
 /*
@@ -84,8 +85,14 @@ void			parse_map(int fd, t_map *map);
 
 int				draw_rect(void *mlx_ptr, void *win_ptr, t_shape rect);
 int				draw_line(t_shape *line);
+int				draw_map(t_map *map, double scale);
+int				draw_gradient_line(t_shape *line, int clr_start, int clr_end);
 
 int				keyboard(int keycode, void *param);
+
+// int				gradient(t_xy current, t_xy start, t_xy end, t_xy delta);
+// int				gradient(t_xy delta, int start, int end);
+int				gradient(t_xyz current, int start, int end, t_xy delta);
 
 t_window		g_env;
 #endif
