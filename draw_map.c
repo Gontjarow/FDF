@@ -6,51 +6,51 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 12:39:46 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/05 15:23:57 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:25:46 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
+#include <time.h>
 
-int		draw_map(t_map *map, double scale)
+int		draw_map(t_map *map, double scale, t_xy (*perspective)(t_xyz))
 {
-	t_xy	point;
-	t_shape	left;
-	t_shape	down;
+	t_line	left;
+	t_line	down;
+	t_xy	next;
+	int x;
+	int y;
 
-	point = (t_xy){0, 0};
-	left = (t_shape){{0,0}, {0,0}, orange};
-	down = (t_shape){{0,0}, {0,0}, red};
-	mlx_clear_window(g_env.mlx, g_env.win);
-	while (point.y < map->size.y)
+	mlx_clear_window((*map).window.mlx, (*map).window.win);
+
+	left.color = orange;
+	down.color = red;
+	y = 0;
+	while (y < map->size.y)
 	{
-		point.x = 0;
-		while (point.x < map->size.x)
+		x = 0;
+		while (x < map->size.x)
 		{
-			// double height = map->array[(int)point.y][(int)point.x].z;
-			// left.color = gradient();
-			if (point.x + 1 < map->size.x)
+			t_xy iso = perspective(map->array[y][x]);
+
+			if (x + 1 < map->size.x)
 			{
-				left.pos = (t_xy){point.x * scale, point.y * scale};
-				left.data = (t_xy){left.pos.x + scale, left.pos.y};
-				// draw_gradient_line(&left, orange, red);
-				draw_line(&left);
-				printf("draw left from x%1.0f->%1.0f y%1.0f->%1.0f\n",
-					point.x, point.x * scale, point.y, point.y * scale);
+				next = perspective(map->array[y][x + 1]);
+				left.pos = VEC2(iso.x * scale, iso.y * scale);
+				left.end = VEC2(next.x * scale, next.y * scale);
+				draw_line((*map).window.mlx, (*map).window.win, left);
 			}
-			if (point.y + 1 < map->size.y)
+			if (y + 1 < map->size.y)
 			{
-				down.pos = (t_xy){point.x * scale, point.y * scale};
-				down.data = (t_xy){down.pos.x, down.pos.y + scale};
-				// draw_gradient_line(&down, orange, red);
-				draw_line(&down);
-				printf("draw down from x%1.0f->%1.0f y%1.0f->%1.0f\n",
-					point.x, point.x * scale, point.y, point.y * scale);
+				next = perspective(map->array[y + 1][x]);
+				down.pos = VEC2(iso.x * scale, iso.y * scale);
+				down.end = VEC2(next.x * scale, next.y * scale);
+				draw_line((*map).window.mlx, (*map).window.win, down);
 			}
-			++point.x;
+			++x;
 		}
-		++point.y;
+		++y;
 	}
 	return (1);
 }

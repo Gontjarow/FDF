@@ -6,7 +6,7 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 12:28:32 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/05 12:38:11 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/09 21:54:11 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,54 +23,43 @@ static size_t	arrlen_terminated(char **array)
 	return (i);
 }
 
-// static size_t	arrlen2_terminated(t_xyz **array)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	printf("oh no?\n");
-// 	while (array[i])
-// 		++i;
-// 	return (i);
-// }
-
 void			parse_map(int fd, t_map *map)
 {
-	char	*lines[4096];
+	static char	*lines[1024];
 	char	*line;
 	char	**split;
-	int		width;
-	int		height;
-	int		x;
-	int		y;
-	(void)map;
+	t_xy	size;
+	t_xy	in;
 
-	height = 0;
+	ft_memset((void*)lines, 0, 1024 * sizeof(char*));
+	size.y = 0;
 	while (ft_get_next_line(fd, &line) > 0)
 	{
-		lines[height] = line;
-		++height;
+		lines[(int)size.y] = line;
+		++size.y;
 	}
-	lines[height] = NULL;
-	width = 0;
-	y = 0;
-	while (y < height)
+	lines[(int)size.y] = NULL;
+	size.x = 0;
+	in.y = 0;
+	while (in.y < size.y)
 	{
-		split = ft_strsplit(lines[y], ' ');
-		if (width == 0)
+		printf("lines[in.y] %s\n", lines[(int)in.y]);
+		// And printf in ft_strsplit
+		split = ft_strsplit(lines[(int)in.y], ' ');
+		if (size.x == 0)
 		{
-			width = arrlen_terminated(split);
-			map->array = malloc2d_xyz((t_xy){width, height});
+			size.x = arrlen_terminated(split);
+			map->array = malloc2d_xyz((t_xy){size.x, size.y});
 		}
-		x = 0;
-		while (x < width)
+		in.x = 0;
+		while (in.x < size.x)
 		{
-			map->array[y][x].x = x;
-			map->array[y][x].y = y;
-			map->array[y][x].z = ft_atoi(split[x]);
-			++x;
+			map->array[(int)in.y][(int)in.x].x = in.x;
+			map->array[(int)in.y][(int)in.x].y = in.y;
+			map->array[(int)in.y][(int)in.x].z = ft_atoi(split[(int)in.x]);
+			++in.x;
 		}
-		++y;
+		++in.y;
 	}
-	map->size = (t_xy){width, height};
+	map->size = (t_xy){size.x, size.y};
 }

@@ -6,7 +6,7 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 21:08:59 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/11/28 15:44:29 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/09 21:47:14 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	word_count(const char *str, char c)
 	return (count);
 }
 
+#include <stdio.h>
+
 static void	split_to_array(char **data, const char *str, char c)
 {
 	int			reading;
@@ -44,7 +46,10 @@ static void	split_to_array(char **data, const char *str, char c)
 			reading = TRUE;
 			end = ft_strchr(str, c);
 			length = (end ? (size_t)(end - str) : ft_strlen(str));
-			*(data++) = ft_strsub(str, 0, length);
+			printf("malloc: '%.*s' to %p\n", (int)length, str, data);
+			if ((*data = ft_strsub(str, 0, length)) == NULL)
+				exit(0);
+			++data;
 		}
 		else if (reading && *str == c)
 			reading = FALSE;
@@ -66,6 +71,10 @@ char		**ft_strsplit(const char *str, char c)
 			ft_memset((void *)data, '\0', bytes);
 			if (bytes > sizeof(char *))
 				split_to_array(data, str, c);
+		}
+		else
+		{
+			exit(0);
 		}
 	}
 	return (data);

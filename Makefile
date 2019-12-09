@@ -6,13 +6,13 @@
 #    By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 13:15:52 by ngontjar          #+#    #+#              #
-#    Updated: 2019/12/05 15:27:26 by ngontjar         ###   ########.fr        #
+#    Updated: 2019/12/09 21:58:49 by ngontjar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SOURCES = main.c die.c parse_map.c free2d.c free2d_terminated.c malloc2d_xyz.c draw_square.c draw_line.c keyboard.c draw_map.c
+SOURCES = main.c die.c parse_map.c malloc2d_xyz.c draw_line.c keyboard.c draw_map.c project_isometric_point.c
 
 OBJECTS = $(subst .c,.o,$(SOURCES))
 
@@ -21,7 +21,7 @@ LIBFT = libft/libft.a
 FLAGS = -Wall -Wextra -Werror
 LINKS = -I libft -L libft \
 	-I /usr/local/include -L /usr/local/lib \
-	-l mlx -l ft -framework OpenGL -framework Appkit
+	-l mlx -l ft -framework OpenGL -framework Appkit -g
 
 .PHONY: re fclean all
 
