@@ -6,7 +6,7 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 12:33:57 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/13 17:56:23 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/13 19:43:09 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_xyz			**malloc2d_xyz(t_xy size);
 
 void			parse_map(int fd, t_map *map);
 
-int				draw_line(void *mlx, void *win, t_line *line);
+int				draw_line(t_map *map, t_line *line);
 int				draw_map_iso(t_map *map, double scale);
 int				draw_map_para(t_map *map, double scale);
 

@@ -6,7 +6,7 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 12:39:46 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/13 18:01:22 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/13 19:39:38 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	draw(t_map *map, t_xy point, t_xy next, double scale)
 		{next.x * scale, next.y * scale},
 		orange
 	};
-	draw_line((*map).window.mlx, (*map).window.win, &direction);
+	draw_line(map, &direction);
 }
 
 int			draw_map_iso(t_map *map, double scale)
