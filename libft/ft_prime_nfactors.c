@@ -6,7 +6,7 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 23:16:15 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/11/27 23:27:47 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/13 18:03:28 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 unsigned int	ft_prime_nfactors(unsigned int number)
 {
-	unsigned int count = 0;
-	unsigned int divisor = 2;
+	unsigned int count;
+	unsigned int divisor;
 
+	count = 0;
+	divisor = 2;
 	while (divisor <= number / 2 + 1)
 	{
 		while (number == 2 || number % divisor == 0)

@@ -6,7 +6,7 @@
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 12:51:33 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/04 16:07:28 by ngontjar         ###   ########.fr       */
+/*   Updated: 2019/12/13 18:13:40 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_xyz	**malloc2d_xyz(t_xy size)
 	int		x;
 	int		y;
 
-	if((rows = (t_xyz **)malloc(size.y * sizeof(t_xyz **))))
+	if ((rows = (t_xyz **)malloc(size.y * sizeof(t_xyz **))))
 	{
 		y = 0;
 		while (y < size.y)

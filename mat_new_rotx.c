@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   mat_new_rotX.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 19:58:20 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/11 17:13:39 by ngontjar         ###   ########.fr       */
+/*   Created: 2019/12/13 16:35:09 by ngontjar          #+#    #+#             */
+/*   Updated: 2019/12/13 17:57:54 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-char	*ft_strsub(const char *str, unsigned int start, size_t n)
+t_matrix	mat_new_rotx(float radians)
 {
-	char	*string;
-	size_t	i;
+	double c;
+	double s;
 
-	string = ft_strnew(n);
-	if (string != NULL)
-	{
-		i = 0;
-		while (i < n)
-		{
-			string[i] = str[start + i];
-			++i;
-		}
-	}
-	return (string);
+	c = cos(radians);
+	s = sin(radians);
+	return ((t_matrix){
+		.m[0][0] = 1, .m[0][1] = 0, .m[0][2] = 0, .m[0][3] = 0,
+		.m[1][0] = 0, .m[1][1] = c, .m[1][2] = s, .m[1][3] = 0,
+		.m[2][0] = 0, .m[2][1] = -s, .m[2][2] = c, .m[2][3] = 0,
+		.m[3][0] = 0, .m[3][1] = 0, .m[3][2] = 0, .m[3][3] = 1
+	});
 }

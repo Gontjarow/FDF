@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   vec3_mul_mat.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 19:58:20 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/11 17:13:39 by ngontjar         ###   ########.fr       */
+/*   Created: 2019/12/13 16:36:19 by ngontjar          #+#    #+#             */
+/*   Updated: 2019/12/13 16:36:24 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-char	*ft_strsub(const char *str, unsigned int start, size_t n)
+t_xyz	vec3_mulmat(t_xyz p, t_matrix mat)
 {
-	char	*string;
-	size_t	i;
-
-	string = ft_strnew(n);
-	if (string != NULL)
-	{
-		i = 0;
-		while (i < n)
-		{
-			string[i] = str[start + i];
-			++i;
-		}
-	}
-	return (string);
+	return ((t_xyz){
+		p.x * mat.m[0][0] + p.y * mat.m[1][0] + p.z * mat.m[2][0],
+		p.x * mat.m[0][1] + p.y * mat.m[1][1] + p.z * mat.m[2][1],
+		p.x * mat.m[0][2] + p.y * mat.m[1][2] + p.z * mat.m[2][2]
+	});
 }

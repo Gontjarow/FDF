@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   to_isometric.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngontjar <ngontjar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 19:58:20 by ngontjar          #+#    #+#             */
-/*   Updated: 2019/12/11 17:13:39 by ngontjar         ###   ########.fr       */
+/*   Created: 2019/12/05 16:09:10 by ngontjar          #+#    #+#             */
+/*   Updated: 2019/12/13 17:47:18 by ngontjar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fdf.h"
 
-char	*ft_strsub(const char *str, unsigned int start, size_t n)
+t_xy	to_isometric(t_xyz p)
 {
-	char	*string;
-	size_t	i;
-
-	string = ft_strnew(n);
-	if (string != NULL)
-	{
-		i = 0;
-		while (i < n)
-		{
-			string[i] = str[start + i];
-			++i;
-		}
-	}
-	return (string);
+	return ((t_xy){
+		(p.x - p.z) / SQRT2,
+		(p.x + (p.y * 2) + p.z) / SQRT6
+	});
 }
